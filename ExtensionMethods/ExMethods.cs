@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ExtensionMethods
 {
-    public static class ExtensionMethods
+    public static class ExMethods
     {
         /// <summary>
         /// Форматирует строку
