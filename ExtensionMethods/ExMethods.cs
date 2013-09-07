@@ -80,5 +80,15 @@ namespace ExtensionMethods
 
             return sign + readable.ToString( "0.## " ) + suffix;
         }
+
+        /// <summary>
+        /// Заменяет перевод строки в ресурсах
+        /// </summary>
+        /// <param name="str">Любая строка</param>
+        /// <returns>Строка с переносами строк</returns>
+        public static string FixNewLines( this string str )
+        {
+            return str.Replace( @"\n", Environment.NewLine );
+        }
     }
 }
