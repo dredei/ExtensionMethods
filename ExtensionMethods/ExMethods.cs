@@ -12,10 +12,20 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="format">Строка или переменная</param>
         /// <param name="args">Аргументы</param>
-        /// <returns></returns>
+        /// <returns>Возвращает отформатированною строку</returns>
         public static string f( this string format, params object[] args )
         {
             return String.Format( format, args );
+        }
+
+        /// <summary>
+        /// Проверяет пустая ли строка
+        /// </summary>
+        /// <param name="str">Строка</param>
+        /// <returns>Возвращает значение, указывающее пустая ли строка</returns>
+        public static bool IsNullOrEmpty( this string str )
+        {
+            return string.IsNullOrEmpty( str );
         }
 
         /// <summary>
