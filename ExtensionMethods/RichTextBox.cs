@@ -1,11 +1,21 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
+
+#endregion
 
 namespace ExtensionMethods
 {
     public static class RichTextBoxExtensions
     {
+        /// <summary>
+        /// Добавляет цветной текст
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public static void AppendText( this RichTextBox box, string text, Color color )
         {
             box.SelectionStart = box.TextLength;
@@ -16,6 +26,13 @@ namespace ExtensionMethods
             box.SelectionColor = box.ForeColor;
         }
 
+        /// <summary>
+        /// Добавляет текст с указанным стилем
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="text"></param>
+        /// <param name="underLine"></param>
+        /// <param name="bold"></param>
         public static void AppendText( this RichTextBox box, string text, bool underLine, bool bold )
         {
             box.SelectionStart = box.TextLength;
@@ -37,6 +54,14 @@ namespace ExtensionMethods
             box.SelectionColor = box.ForeColor;
         }
 
+        /// <summary>
+        /// Добавляет цветной текст с указанным стилем
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="text"></param>
+        /// <param name="underLine"></param>
+        /// <param name="bold"></param>
+        /// <param name="color"></param>
         public static void AppendText( this RichTextBox box, string text, bool underLine, bool bold, Color color )
         {
             box.SelectionStart = box.TextLength;
@@ -59,9 +84,15 @@ namespace ExtensionMethods
             box.SelectionColor = box.ForeColor;
         }
 
+        /// <summary>
+        /// Подгоняет размеры контрола под размеры текста
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="frm"></param>
         public static void AutoSize( this RichTextBox box, Form frm )
         {
             #region AutoSize RichTextBox (Height)
+
             Size sz = new Size( box.ClientSize.Width, int.MaxValue );
             TextFormatFlags flags = TextFormatFlags.WordBreak;
             int padding = 3;
@@ -73,8 +104,11 @@ namespace ExtensionMethods
                 h = frm.ClientSize.Height - 10 - box.Top;
             }
             box.Height = h + 10;
+
             #endregion
+
             #region AutoSize RichTextBox (Width)
+
             System.Drawing.SizeF mySize = new System.Drawing.SizeF();
             System.Drawing.Font myFont = box.Font;
             using ( Graphics g = frm.CreateGraphics() )
@@ -83,38 +117,25 @@ namespace ExtensionMethods
                 mySize = g.MeasureString( box.Text, myFont );
             }
             box.Width = (int)Math.Round( mySize.Width, 0 ) + 10;
+
             #endregion
-            /*Size size = box.GetPreferredSize( box.Size );
-            box.Height = size.Height;
-            box.Width = size.Width;*/
-            /*box.Width = TextRenderer.MeasureText( box.Text, box.Font ).Width + 15;
-            box.Height = TextRenderer.MeasureText( box.Text, box.Font ).Height + 15;*/
         }
 
+        /// <summary>
+        /// Добавляет новую линию
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="value">Текст</param>
         public static void AppendLine( this RichTextBox source, string value )
         {
             if ( source.Text.Length == 0 )
+            {
                 source.Text = value;
+            }
             else
+            {
                 source.AppendText( "\r\n" + value );
+            }
         }
-
-        /*public static void AppendLine( this RichTextBox source, string value, Color color )
-        {
-            if ( source.Text.Length == 0 )
-                //source.Text = value;
-                source.AppendText( value, color );
-            else
-                source.AppendText( "\r\n" + value, color );
-        }
-
-        public static void AppendLine( this RichTextBox source, string value, bool underLine, bool bold )
-        {
-            if ( source.Text.Length == 0 )
-                //source.Text = value;
-                source.AppendText( value, underLine, bold );
-            else
-                source.AppendText( "\r\n" + value, underLine, bold );
-        }*/
     }
 }

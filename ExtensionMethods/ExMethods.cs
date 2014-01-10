@@ -1,7 +1,10 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
+
+#endregion
 
 namespace ExtensionMethods
 {
@@ -13,7 +16,7 @@ namespace ExtensionMethods
         /// <param name="format">Строка или переменная</param>
         /// <param name="args">Аргументы</param>
         /// <returns>Возвращает отформатированною строку</returns>
-        public static string f( this string format, params object[] args )
+        public static string F( this string format, params object[] args )
         {
             return String.Format( format, args );
         }
@@ -35,6 +38,10 @@ namespace ExtensionMethods
         /// <param name="fileName">Путь к файлу</param>
         public static void SaveToFile( this List<string> list, string fileName )
         {
+            if ( string.IsNullOrEmpty( fileName ) )
+            {
+                return;
+            }
             if ( !Directory.Exists( Path.GetDirectoryName( fileName ) ) )
             {
                 Directory.CreateDirectory( Path.GetDirectoryName( fileName ) );
@@ -47,7 +54,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="i">Размер файла в байтах</param>
         /// <returns>Форматированная строка в читабельном виде</returns>
-        public static string getSizeReadable( long i )
+        public static string GetSizeReadable( long i )
         {
             string sign = ( i < 0 ? "-" : "" );
             double readable = ( i < 0 ? -i : i );
